@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "mega_bucket",
+  "version": "${version}",
+  "name": "Mega Bucket",
+  "description": "Custom quantity iron and capacity-based buckets. Created by UltraOP.",
+  "authors": ["UltraOP"],
+  "contact": {
+    "sources": "https://github.com/ultraop/Mega-Bucket"
+  },
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.ultraop.megabucket.MegaBucketMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
