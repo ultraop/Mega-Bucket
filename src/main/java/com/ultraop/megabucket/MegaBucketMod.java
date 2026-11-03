@@ -38,7 +38,7 @@ public final class MegaBucketMod implements ModInitializer {
                             .requires(source -> source.getPermissions().hasPermission(new Permission.Level(PermissionLevel.ADMINS)))
                             .executes(ctx -> pending(ctx.getSource(), "bucket capacity", LongArgumentType.getLong(ctx, "amount"))))))
                 .then(CommandManager.literal("reload")
-                    .requires(source -> source.hasPermissionLevel(2))
+                    .requires(source -> source.getPermissions().hasPermission(new Permission.Level(PermissionLevel.ADMINS)))
                     .executes(ctx -> {
                         ctx.getSource().sendFeedback(() -> Text.literal("Configuration reload is not implemented yet.")
                             .formatted(Formatting.YELLOW), true);
