@@ -14,7 +14,7 @@
     "main": ["com.ultraop.megabucket.MegaBucketMod"]
   },
   "depends": {
-    "fabricloader": ">=0.18.1",
+    "fabricloader": ">=0.19.3",
     "minecraft": "1.21.11",
     "java": ">=21",
     "fabric-api": "*"
