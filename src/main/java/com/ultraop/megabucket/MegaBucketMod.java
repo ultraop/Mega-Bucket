@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public final class MegaBucketMod implements ModInitializer {
                 .then(CommandManager.literal("give")
                     .then(CommandManager.literal("iron")
                         .then(CommandManager.argument("amount", LongArgumentType.longArg(1, MAX_AMOUNT))
-                            .requires(source -> source.hasPermissionLevel(2))
+                            .requires(MegaBucketMod::isOperator)
                             .executes(ctx -> pending(ctx.getSource(), "custom iron", LongArgumentType.getLong(ctx, "amount")))))
                     .then(CommandManager.literal("bucket")
                         .then(CommandManager.argument("amount", LongArgumentType.longArg(1, MAX_AMOUNT))
@@ -80,6 +81,11 @@ public final class MegaBucketMod implements ModInitializer {
         source.sendFeedback(() -> Text.literal("Created by ").formatted(Formatting.GRAY)
             .append(Text.literal("UltraOP").formatted(Formatting.GOLD, Formatting.BOLD)), false);
         return 1;
+    }
+
+    private static boolean isOperator(ServerCommandSource source) {
+        return source.getEntity() == null || (source.getEntity() instanceof ServerPlayerEntity player
+            && source.getServer().getPlayerManager().isOperator(player.getGameProfile()));
     }
 
     private static int pending(ServerCommandSource source, String type, long amount) {
